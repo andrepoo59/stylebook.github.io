@@ -1,7 +1,4 @@
-Flask==3.0.3
+﻿Flask==3.0.3
 python-dotenv==1.0.1
 supabase==2.7.4
-<<<<<<< HEAD
-=======
 gunicorn
->>>>>>> 569a8a05cf0d927f8d0dcf1ef5a65f7adff87317
