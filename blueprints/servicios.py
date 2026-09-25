@@ -1,12 +1,12 @@
-<<<<<<< HEAD
+
 """HU-05 Gestión de servicios (crear, editar, eliminar los propios)
 HU-06 Consultar servicios (catálogo público)"""
-=======
+
 """
 HU-05 Gestión de servicios (crear, editar, eliminar los propios)
 HU-06 Consultar servicios (catálogo público)
 """
->>>>>>> 569a8a05cf0d927f8d0dcf1ef5a65f7adff87317
+
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 
 from supabase_client import sb

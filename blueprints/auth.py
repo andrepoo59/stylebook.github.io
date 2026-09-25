@@ -1,12 +1,10 @@
-<<<<<<< HEAD
+
 """HU-01 Registro de usuario (con selección de tipo de cuenta: cliente o profesional)
 HU-02 Inicio de sesión"""
-=======
 """
 HU-01 Registro de usuario (con selección de tipo de cuenta: cliente o profesional)
 HU-02 Inicio de sesión
 """
->>>>>>> 569a8a05cf0d927f8d0dcf1ef5a65f7adff87317
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 
 from supabase_client import sb, sb_como_usuario
