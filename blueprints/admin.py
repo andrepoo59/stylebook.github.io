@@ -1,12 +1,10 @@
-<<<<<<< HEAD
+
 """Panel de administrador: aprobar o rechazar el registro de profesionales
 antes de que aparezcan públicamente (cargo "administrador")."""
-=======
 """
 Panel de administrador: aprobar o rechazar el registro de profesionales
 antes de que aparezcan públicamente (cargo "administrador").
 """
->>>>>>> 569a8a05cf0d927f8d0dcf1ef5a65f7adff87317
 from flask import Blueprint, render_template, redirect, url_for, flash
 
 from utilidades import exigir_admin, cliente_sesion

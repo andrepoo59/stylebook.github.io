@@ -1,12 +1,10 @@
-<<<<<<< HEAD
+
 """HU-04 Registro de proveedor (profesional del establecimiento)
 HU-07 Consultar proveedor (perfil público del profesional)"""
-=======
 """
 HU-04 Registro de proveedor (profesional del establecimiento)
 HU-07 Consultar proveedor (perfil público del profesional)
 """
->>>>>>> 569a8a05cf0d927f8d0dcf1ef5a65f7adff87317
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 
 from supabase_client import sb
