@@ -8,6 +8,7 @@ from blueprints.perfil import perfil_bp
 from blueprints.profesionales import profesionales_bp
 from blueprints.servicios import servicios_bp
 from blueprints.admin import admin_bp
+from blueprints.citas import citas_bp  
 
 load_dotenv()
 
@@ -19,7 +20,7 @@ app.register_blueprint(perfil_bp)
 app.register_blueprint(profesionales_bp)
 app.register_blueprint(servicios_bp)
 app.register_blueprint(admin_bp)
-
+app.register_blueprint(citas_bp) 
 
 @app.route("/")
 def index():
