@@ -17,6 +17,7 @@
       <a href="{{ url_for('profesionales.listar') }}">Profesionales</a>
       {% if session.get('access_token') %}
         <a href="{{ url_for('perfil.ver') }}">Mi perfil</a>
+        <a href="{{ url_for('citas.listar') }}">Mis citas</a>
         {% if session.get('rol') == 'admin' %}
           <a href="{{ url_for('admin.panel') }}">Panel admin</a>
         {% endif %}
