@@ -15,7 +15,7 @@ create table if not exists public.perfiles (
 );
 
 -- El perfil se crea solo al registrarse (HU-01)
-create or replace function public.crear_perfil()
+create or replace function public.crear_perfil()   
 returns trigger
 language plpgsql
 security definer
