@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block titulo %}Mis citas · StyleBook{% endblock %}
+{% block contenido %}
+  <h1>Mis citas</h1>
+  {% if citas %}
+    <div class="rejilla">
+      {% for c in citas %}
+        <div class="tarjeta">
+          <span class="etiqueta">{{ c.estado }}</span>
+          <h3>{{ c.servicios.nombre if c.servicios else "Servicio" }}</h3>
+          <p class="detalle-menor">
+            Con {{ c.profesionales.perfiles.nombre if c.profesionales else "" }}
+            &middot; {{ c.profesionales.especialidad if c.profesionales else "" }}
+          </p>
+          <p>{{ c.fecha }} &middot; {{ c.hora_inicio }} - {{ c.hora_fin }}</p>
+          {% if c.estado in ['pendiente', 'confirmada'] %}
+            <div class="acciones" style="margin-top:.9rem">
+              <a class="boton boton-secundario" href="{{ url_for('citas.reprogramar', cita_id=c.id) }}">Reprogramar</a>
+              <form action="{{ url_for('citas.cancelar', cita_id=c.id) }}" method="post" style="display:inline">
+                <button type="submit" class="boton-secundario"
+                  onclick="return confirm('¿Cancelar esta cita?')">Cancelar</button>
+              </form>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="vacio">Todavía no tienes citas agendadas.</p>
+  {% endif %}
+{% endblock %}

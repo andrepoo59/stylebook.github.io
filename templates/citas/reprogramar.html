@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block titulo %}Reprogramar cita · StyleBook{% endblock %}
+{% block contenido %}
+  <section class="formulario-angosto">
+    <h1>Reprogramar cita</h1>
+    <p class="detalle-menor">Horario actual: {{ cita.fecha }} · {{ cita.hora_inicio }} - {{ cita.hora_fin }}</p>
+    <form method="POST">
+      <label for="fecha">Nueva fecha</label>
+      <input type="date" id="fecha" name="fecha" required />
+
+      <label for="hora_inicio">Nueva hora</label>
+      <input type="time" id="hora_inicio" name="hora_inicio" required />
+
+      <button type="submit" class="boton">Confirmar cambio</button>
+    </form>
+    <p><a href="{{ url_for('citas.listar') }}">Volver a mis citas</a></p>
+  </section>
+{% endblock %}
