@@ -1,6 +1,3 @@
-
-"""Panel de administrador: aprobar o rechazar el registro de profesionales
-antes de que aparezcan públicamente (cargo "administrador")."""
 """
 Panel de administrador: aprobar o rechazar el registro de profesionales
 antes de que aparezcan públicamente (cargo "administrador").

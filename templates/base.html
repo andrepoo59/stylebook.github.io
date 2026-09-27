@@ -17,10 +17,14 @@
       <a href="{{ url_for('profesionales.listar') }}">Profesionales</a>
       {% if session.get('access_token') %}
         <a href="{{ url_for('perfil.ver') }}">Mi perfil</a>
+<<<<<<< HEAD
         {% if session.get('rol') == 'profesional' %}
           <a href="{{ url_for('horarios.gestionar') }}">Mi horario</a>
         {% endif %}
         <a href="{{ url_for('citas.mis_citas') }}">Mis citas</a>
+=======
+        <a href="{{ url_for('citas.listar') }}">Mis citas</a>
+>>>>>>> 0300b8583c55956080048f6f94bd1c5eb3516bf8
         {% if session.get('rol') == 'admin' %}
           <a href="{{ url_for('admin.panel') }}">Panel admin</a>
         {% endif %}

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # StyleBook
 
 Sistema web desarrollado en Flask para la gestión, reserva y administración de servicios profesionales y perfiles de usuario, integrado con Supabase como backend de base de datos.
@@ -165,7 +165,6 @@ gunicorn -w 4 -b 0.0.0.0:5000 app:app
 
 ## Licencia
 
-=======
 # StyleBook
 
 Sistema web desarrollado en Flask para la gestión, reserva y administración de servicios profesionales y perfiles de usuario, integrado con Supabase como backend de base de datos.
@@ -332,5 +331,5 @@ gunicorn -w 4 -b 0.0.0.0:5000 app:app
 
 ## Licencia
 
->>>>>>> 569a8a05cf0d927f8d0dcf1ef5a65f7adff87317
+
 Este proyecto se encuentra bajo los términos de la licencia especificada en el repositorio. Consulta el archivo de licencia para más detalles.

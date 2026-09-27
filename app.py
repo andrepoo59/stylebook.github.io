@@ -11,7 +11,7 @@ from blueprints.admin import admin_bp
 from blueprints.horarios import horarios_bp
 from blueprints.citas import citas_bp
 
-
+from blueprints.citas import citas_bp  
 
 load_dotenv()
 
@@ -23,8 +23,11 @@ app.register_blueprint(perfil_bp)
 app.register_blueprint(profesionales_bp)
 app.register_blueprint(servicios_bp)
 app.register_blueprint(admin_bp)
+
 app.register_blueprint(horarios_bp)
 app.register_blueprint(citas_bp)
+
+app.register_blueprint(citas_bp) 
 
 @app.route("/")
 def index():

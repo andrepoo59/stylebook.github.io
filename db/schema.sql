@@ -15,7 +15,7 @@ create table if not exists public.perfiles (
 );
 
 -- El perfil se crea solo al registrarse (HU-01)
-create or replace function public.crear_perfil()
+create or replace function public.crear_perfil()   
 returns trigger
 language plpgsql
 security definer
@@ -130,3 +130,40 @@ create policy "servicios baja propia" on public.servicios
     exists (select 1 from public.profesionales p
             where p.id = profesional_id and p.perfil_id = auth.uid())
   );
+
+-- ---------- 5. CITAS (HU-06: cancelar / reprogramar) ----------
+create table if not exists public.citas (
+  id             uuid primary key default gen_random_uuid(),
+  cliente_id     uuid not null references public.perfiles(id) on delete cascade,
+  profesional_id uuid not null references public.profesionales(id) on delete cascade,
+  servicio_id    uuid not null references public.servicios(id) on delete cascade,
+  fecha          date not null,
+  hora_inicio    time not null,
+  hora_fin       time not null,
+  estado         text not null default 'confirmada'
+                 check (estado in ('pendiente', 'confirmada', 'cancelada', 'completada')),
+  creado_en      timestamptz not null default now()
+);
+
+create index if not exists idx_citas_cliente on public.citas(cliente_id);
+create index if not exists idx_citas_profesional_fecha on public.citas(profesional_id, fecha);
+
+alter table public.citas enable row level security;
+
+-- El cliente ve solo sus propias citas
+drop policy if exists "citas propias lectura cliente" on public.citas;
+create policy "citas propias lectura cliente" on public.citas
+  for select using (auth.uid() = cliente_id);
+
+-- El profesional ve las citas que le corresponden
+drop policy if exists "citas propias lectura profesional" on public.citas;
+create policy "citas propias lectura profesional" on public.citas
+  for select using (
+    exists (select 1 from public.profesionales p
+            where p.id = profesional_id and p.perfil_id = auth.uid())
+  );
+
+-- El cliente solo puede modificar (cancelar/reprogramar) sus propias citas
+drop policy if exists "citas edicion propia cliente" on public.citas;
+create policy "citas edicion propia cliente" on public.citas
+  for update using (auth.uid() = cliente_id) with check (auth.uid() = cliente_id);

@@ -1,6 +1,3 @@
-
-"""HU-04 Registro de proveedor (profesional del establecimiento)
-HU-07 Consultar proveedor (perfil público del profesional)"""
 """
 HU-04 Registro de proveedor (profesional del establecimiento)
 HU-07 Consultar proveedor (perfil público del profesional)
