@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block titulo %}Reservar cita · StyleBook{% endblock %}
+{% block contenido %}
+  <section>
+    <h1>Reservar con {{ profesional.perfiles.nombre }}</h1>
+
+    <form method="post" id="form-reserva" class="formulario">
+      <label>Servicio
+        <select name="servicio_id" id="servicio_id" required>
+          <option value="">Selecciona un servicio</option>
+          {% for s in servicios %}
+            <option value="{{ s.id }}" {% if s.id == servicio_id %}selected{% endif %}>
+              {{ s.nombre }} — ${{ "%.2f"|format(s.precio) }} ({{ s.duracion_min }} min)
+            </option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label>Fecha
+        <input type="date" name="fecha" id="fecha" value="{{ fecha or '' }}" required>
+      </label>
+
+      <label>Horario disponible
+        <select name="hora_inicio" id="hora_inicio" required>
+          {% if horarios_libres %}
+            {% for h in horarios_libres %}<option value="{{ h }}">{{ h }}</option>{% endfor %}
+          {% else %}
+            <option value="">Elige servicio y fecha primero</option>
+          {% endif %}
+        </select>
+      </label>
+
+      <button type="submit">Confirmar reserva</button>
+    </form>
+  </section>
+
+  <script>
+    // HU-03: refresca los horarios realmente libres al cambiar servicio o fecha.
+    const profesionalId = "{{ profesional.id }}";
+    const selectServicio = document.getElementById("servicio_id");
+    const inputFecha = document.getElementById("fecha");
+    const selectHorario = document.getElementById("hora_inicio");
+
+    async function actualizarHorarios() {
+      const servicioId = selectServicio.value;
+      const fecha = inputFecha.value;
+      if (!servicioId || !fecha) return;
+
+      const resp = await fetch(`/profesionales/${profesionalId}/horarios-disponibles?servicio_id=${servicioId}&fecha=${fecha}`);
+      const datos = await resp.json();
+
+      selectHorario.innerHTML = "";
+      if (datos.horarios.length === 0) {
+        selectHorario.innerHTML = '<option value="">Sin horarios libres ese día</option>';
+        return;
+      }
+      datos.horarios.forEach((h) => {
+        const opcion = document.createElement("option");
+        opcion.value = h;
+        opcion.textContent = h;
+        selectHorario.appendChild(opcion);
+      });
+    }
+
+    selectServicio.addEventListener("change", actualizarHorarios);
+    inputFecha.addEventListener("change", actualizarHorarios);
+  </script>
+{% endblock %}

@@ -29,5 +29,13 @@
     {% else %}
       <p>Este profesional todavía no ha cargado servicios.</p>
     {% endif %}
+
+    {% if session.get('access_token') %}
+      <a href="{{ url_for('citas.reservar', profesional_id=profesional.id) }}" class="boton">
+        Reservar cita
+      </a>
+    {% else %}
+      <p><a href="{{ url_for('auth.login') }}">Inicia sesión</a> para reservar una cita.</p>
+    {% endif %}
   </section>
 {% endblock %}

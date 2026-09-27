@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block titulo %}Mis citas · StyleBook{% endblock %}
+{% block contenido %}
+  <section>
+    <h1>Mis citas</h1>
+    {% if citas %}
+      <ul class="lista-servicios">
+        {% for c in citas %}
+          <li>
+            <strong>{{ c.servicios.nombre }}</strong> con {{ c.profesionales.perfiles.nombre }}
+            — {{ c.fecha }} {{ c.hora_inicio[:5] }}–{{ c.hora_fin[:5] }}
+            <span class="etiqueta">{{ c.estado }}</span>
+            {% if c.estado == 'confirmada' %}
+              <form method="post" action="{{ url_for('citas.cancelar', cita_id=c.id) }}" style="display:inline">
+                <button type="submit">Cancelar</button>
+              </form>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Todavía no tienes citas reservadas.</p>
+    {% endif %}
+  </section>
+{% endblock %}

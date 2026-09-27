@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block titulo %}Mi horario laboral · StyleBook{% endblock %}
+{% block contenido %}
+  <section>
+    <h1>Mi horario laboral</h1>
+    <p>Define las franjas en las que apareces disponible para que tus clientes reserven citas.</p>
+
+    <form method="post" action="{{ url_for('horarios.nuevo') }}" class="formulario">
+      <label>Día
+        <select name="dia_semana" required>
+          {% for dia in dias %}
+            <option value="{{ loop.index0 }}">{{ dia }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Desde <input type="time" name="hora_inicio" required></label>
+      <label>Hasta <input type="time" name="hora_fin" required></label>
+      <button type="submit">Agregar franja</button>
+    </form>
+
+    {% if horarios %}
+      <ul class="lista-servicios">
+        {% for h in horarios %}
+          <li>
+            <strong>{{ dias[h.dia_semana] }}</strong>: {{ h.hora_inicio[:5] }} – {{ h.hora_fin[:5] }}
+            <form method="post" action="{{ url_for('horarios.eliminar', horario_id=h.id) }}" style="display:inline">
+              <button type="submit">Eliminar</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Todavía no has definido tu horario laboral.</p>
+    {% endif %}
+  </section>
+{% endblock %}

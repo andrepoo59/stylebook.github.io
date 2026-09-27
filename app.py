@@ -8,6 +8,10 @@ from blueprints.perfil import perfil_bp
 from blueprints.profesionales import profesionales_bp
 from blueprints.servicios import servicios_bp
 from blueprints.admin import admin_bp
+from blueprints.horarios import horarios_bp
+from blueprints.citas import citas_bp
+
+
 
 load_dotenv()
 
@@ -19,7 +23,8 @@ app.register_blueprint(perfil_bp)
 app.register_blueprint(profesionales_bp)
 app.register_blueprint(servicios_bp)
 app.register_blueprint(admin_bp)
-
+app.register_blueprint(horarios_bp)
+app.register_blueprint(citas_bp)
 
 @app.route("/")
 def index():
@@ -29,5 +34,4 @@ def index():
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 5000))
-    app.run(host= "0.0.0.0", port=port)
-
+    app.run(host= "0.0.0.0", port=port)    
